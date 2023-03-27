@@ -1,0 +1,65 @@
+.App-body {
+  background-image: url("https://storage.googleapis.com/corporacionmdc-imgs/bg.jpg");
+  background-attachment: fixed;
+}
+
+.horizontal-menu-1 {
+  list-style: none;
+  margin: 0;
+  padding: 40px 0px;
+  overflow: hidden;
+}
+.horizontal-menu-1 li {
+  float: right;
+  margin: 0 60px 0 60px;
+}
+.horizontal-menu-1 li a {
+  display: block;
+  padding: 0px 0px 0px;
+  margin: 15px 0 0;
+  text-align: center;
+  font-size: 18px;
+  transition: font-size 0.5s;
+  cursor: pointer;
+}
+.logout {
+  display: block;
+  padding: 0px 0px 0px;
+  margin: 15px 0 0;
+  text-align: center;
+  font-size: 18px;
+  transition: font-size 0.5s;
+  cursor: pointer;
+}
+
+.logout:hover {
+  font-size: 19px;
+}
+
+.horizontal-menu-1 li a:hover {
+  font-size: 19px;
+}
+
+@media screen and (max-width: 800px) {
+  .horizontal-menu-1 li {
+    float: none;
+  }
+  .App-logo {
+    visibility: hidden;
+  }
+}
+
+.App-logo {
+  display: inline-block;
+  height: 120px;
+  position: absolute;
+  left: 15px;
+  top: 15px;
+}
+
+.App-header {
+  border-bottom: solid;
+  border-width: 20px;
+  border-color: #000983bb;
+  padding: 0 0 20px 0;
+}

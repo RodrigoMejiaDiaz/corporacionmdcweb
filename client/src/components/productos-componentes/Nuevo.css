@@ -1,0 +1,61 @@
+.container-nuevo-producto label {
+  color: black;
+}
+p {
+  overflow-wrap: break-word;
+}
+.container-nuevo-producto {
+  background-color: aliceblue;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.formulario-col {
+  flex-grow: 2;
+  background-color: rgb(220, 229, 236);
+}
+
+.formulario-col > * {
+  margin-bottom: 10px;
+}
+
+.formulario-col label {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.formulario-col button {
+  transition: scale 1s;
+}
+.formulario-col button:hover {
+  scale: 1.05;
+}
+
+.preview-col {
+  flex-grow: 1;
+}
+
+.form-select option {
+  color: black;
+}
+
+.toast-mediano {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 300px;
+}
+
+@media screen and (max-width: 768px) {
+  .formulario-col {
+    flex-grow: 1;
+  }
+
+  .preview-col {
+    flex-grow: 1;
+    margin-top: 20px;
+  }
+}

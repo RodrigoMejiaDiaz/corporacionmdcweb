@@ -1,0 +1,11 @@
+.container-home {
+  background-color: aliceblue;
+  margin: 0 20ch;
+  padding-top: 10ch;
+}
+
+@media screen and (max-width: 950px) {
+  .container-home {
+    margin: 0;
+  }
+}

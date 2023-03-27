@@ -1,0 +1,19 @@
+.container-marcas {
+  margin: 0px 90px;
+  border-bottom: solid;
+  border-color: rgb(0, 33, 131);
+  background-color: rgb(246, 252, 255);
+  text-align: center;
+}
+.container-marcas h3 {
+  padding: 10px 0;
+  text-align: center;
+  color: #ffffff;
+  vertical-align: middle;
+  background-color: #000983c7;
+}
+.img-logo {
+  object-fit: contain;
+  height: 100%;
+  width: 130px;
+}

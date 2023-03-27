@@ -1,0 +1,34 @@
+.container-contacto {
+  margin: 0px 10ch;
+}
+.formulario {
+  background-color: #e6e6e6;
+  padding: 25px;
+  border-radius: 40px 0 0 0;
+  box-shadow: 5px 5px 10px;
+}
+.formulario h2 {
+  padding-left: 5px;
+  padding-bottom: 15px;
+  color: #0844a4;
+  font-weight: bold;
+}
+.formulario label {
+  color: black;
+}
+
+.container-info {
+  background-color: #0844a4;
+  opacity: 90%;
+  padding-top: 20px;
+  color: white;
+  line-height: 40px;
+  font-size: 20px;
+  border-radius: 0 0 40px 0;
+}
+.container-info h4 {
+  padding: 10px 0 0 26px;
+}
+.container-info ul {
+  list-style: none;
+}

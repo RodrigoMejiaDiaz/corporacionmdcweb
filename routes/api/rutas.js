@@ -5,6 +5,7 @@ const path = require("path");
 const { v4: uuidv4 } = require("uuid");
 const multer = require("multer");
 const os = require("os");
+const fs = require("fs");
 
 const storageM = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -26,21 +27,12 @@ const fileFilter = (req, file, cb) => {
 
 let upload = multer({ storage: storageM, fileFilter });
 
-const keyfile = json({
-  type: process.env.type,
-  project_id: process.env.project_id,
-  private_key_id: process.env.private_key_id,
-  private_key: process.env.private_key,
-  client_email: process.env.client_email,
-  client_id: process.env.client_id,
-  auth_uri: process.env.auth_uri,
-  token_uri: process.env.token_uri,
-  auth_provider_x509_cert_url: process.env.auth_provider_x509_cert_url,
-  client_x509_cert_url: process.env.client_x509_cert_url,
-});
+const gTokenPath = path.join(`${__dirname}/gToken.json`);
+fs.writeFileSync(gTokenPath, process.env.GCS_KEYFILE);
+const keyfile = JSON.parse(process.env.GCS_KEYFILE);
 const storage = new Storage({
-  projectId: "deep-clock-381322",
-  keyFilename: keyfile,
+  projectId: keyfile.project_id,
+  keyFilename: gTokenPath,
 });
 
 const bucket = storage.bucket("corporacionmdc-imgs");

@@ -54,11 +54,11 @@ const ProductosLista = () => {
 
   const handleEliminarProducto = async (producto) => {
     try {
-      await axios.delete(`http://localhost:5000/api/productos/${producto._id}`);
+      await axios.delete(`/api/productos/${producto._id}`);
       console.log("Se ha eliminado el producto");
 
       // Hacer una nueva petición a la API para obtener la lista actualizada de productos
-      const response = await axios.get("http://localhost:5000/api/productos");
+      const response = await axios.get("/api/productos");
       setProductos(response.data);
 
       setShowToast(true);

@@ -35,8 +35,6 @@ const storage = new Storage({
   keyFilename: gTokenPath,
 });
 
-const bucket = storage.bucket("corporacionmdc-imgs");
-
 const subirImagen = async (archivo) => {
   try {
     const nombreArchivo = uuidv4() + path.extname(archivo.originalname);
@@ -48,6 +46,7 @@ const subirImagen = async (archivo) => {
         contentType: archivo.mimetype,
       },
     };
+    const bucket = storage.bucket("corporacionmdc-imgs");
     await bucket.upload(archivoStream, opcionesUpload);
     const url = `https://storage.googleapis.com/${bucket.name}/${nombreArchivo}`;
     console.log("Se subió la imagen al url:" + url);
@@ -94,7 +93,6 @@ router.get("/categorias/:id", (req, res) => {
 
 // Load Producto model
 const Producto = require("../../models/Producto");
-const { json } = require("body-parser");
 
 // @route GET api/productos
 // @description Get all productos

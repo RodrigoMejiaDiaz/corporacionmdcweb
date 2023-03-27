@@ -26,7 +26,7 @@ const fileFilter = (req, file, cb) => {
 
 let upload = multer({ storage: storageM, fileFilter });
 
-const keyfile = {
+const keyfile = json({
   type: process.env.type,
   project_id: process.env.project_id,
   private_key_id: process.env.private_key_id,
@@ -37,8 +37,7 @@ const keyfile = {
   token_uri: process.env.token_uri,
   auth_provider_x509_cert_url: process.env.auth_provider_x509_cert_url,
   client_x509_cert_url: process.env.client_x509_cert_url,
-};
-
+});
 const storage = new Storage({
   projectId: "deep-clock-381322",
   keyFilename: keyfile,
@@ -57,8 +56,6 @@ const subirImagen = async (archivo) => {
         contentType: archivo.mimetype,
       },
     };
-    console.log("PATH: " + archivo.path);
-    console.log("keyfile: " + keyfile);
     await bucket.upload(archivoStream, opcionesUpload);
     const url = `https://storage.googleapis.com/${bucket.name}/${nombreArchivo}`;
     console.log("Se subió la imagen al url:" + url);
@@ -105,6 +102,7 @@ router.get("/categorias/:id", (req, res) => {
 
 // Load Producto model
 const Producto = require("../../models/Producto");
+const { json } = require("body-parser");
 
 // @route GET api/productos
 // @description Get all productos

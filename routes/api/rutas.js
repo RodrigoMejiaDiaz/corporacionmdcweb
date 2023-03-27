@@ -57,6 +57,8 @@ const subirImagen = async (archivo) => {
         contentType: archivo.mimetype,
       },
     };
+    console.log("PATH: " + archivo.path);
+    console.log("keyfile: " + keyfile);
     await bucket.upload(archivoStream, opcionesUpload);
     const url = `https://storage.googleapis.com/${bucket.name}/${nombreArchivo}`;
     console.log("Se subió la imagen al url:" + url);

@@ -1,35 +1,38 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate, useParams, Link } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 
 import "./Producto.css";
+import DetalleProducto from "./DetalleProducto";
+import Relacionados from "./Relacionados";
 
 const Producto = () => {
-  const [producto, setProducto] = useState([]);
-
   const { id } = useParams();
 
   const location = useLocation();
 
   const productoslista = location.state?.productoslista;
+  const [producto, setProducto] = useState(location.state?.producto);
 
   const [pdf, setPdf] = useState("noMostrarPdf");
 
   useEffect(() => {
     //Productos
-    axios
-      .get(`/api/productos/${id}`)
-      .then((res) => {
-        setProducto(res.data);
-      })
-      .catch((err) => {
-        console.log("Error from showProductosList");
-        setProducto(undefined);
-      })
-      .then(() => {
-        window.scrollTo(0, 0);
-      });
+    if (producto) {
+      axios
+        .get(`/api/productos/${id}`)
+        .then((res) => {
+          setProducto(res.data);
+        })
+        .catch((err) => {
+          console.log("Error from showProductosList" + err);
+          setProducto(undefined);
+        })
+        .then(() => {
+          window.scrollTo(0, 0);
+        });
+    }
   }, [id]);
 
   //Botón retroceder
@@ -59,7 +62,7 @@ const Producto = () => {
 
   return (
     <div className="producto">
-      {producto === null || producto === undefined ? (
+      {!producto ? (
         <>
           <Button onClick={goBack}>Volver</Button>
           <h1 style={{ backgroundColor: "aliceblue" }}>
@@ -73,93 +76,15 @@ const Producto = () => {
           <Button onClick={goBack} variant="link" className="btn-volver">
             Volver
           </Button>
-          <Container className="container-producto text-center">
-            <Row>
-              <Col md={10}>
-                <Row className="descripcion-producto">
-                  <h2
-                    style={{
-                      borderBottom: "solid 2px ",
-                      paddingBottom: "1ch",
-                    }}
-                  >
-                    {producto.nombre}
-                  </h2>
-                  <p>{producto.desc}</p>
-                  <p>Marca: {producto.marca}</p>
-                  <p>Categoria: {producto.categoria}</p>
-                </Row>
-                <Row
-                  style={{
-                    justifyContent: "center",
-                  }}
-                >
-                  <img
-                    src={producto.img}
-                    alt={producto.img}
-                    style={{
-                      boxShadow: "2px 2px 10px",
-                    }}
-                  />
-                </Row>
-              </Col>
-              <Col md={2} style={{ alignSelf: "center" }}>
-                <Button className="btn btn-primary btn-lg" onClick={onSubmit}>
-                  Cotizar por Whatsapp
-                </Button>
-              </Col>
-            </Row>
-          </Container>
-          <Container className="container-pdf text-center">
-            <Button onClick={mostrarPDF} style={{ marginTop: "2ch" }}>
-              Mostrar Catálogo
-            </Button>
+          <DetalleProducto
+            onSubmit={onSubmit}
+            producto={producto}
+            mostrarPDF={mostrarPDF}
+            pdf={pdf}
+          />
 
-            <div className={`pdf-viewer ${pdf}`}>
-              <object
-                data={
-                  "https://storage.googleapis.com/corporacionmdc-imgs/pdfPrueba.pdf"
-                }
-                type="application/pdf"
-                width="100%"
-                height="100%"
-              >
-                <p>
-                  Texto Alternativo -{" "}
-                  <a href="https://storage.googleapis.com/corporacionmdc-imgs/pdfPrueba.pdf">
-                    Abrir PDF
-                  </a>
-                </p>
-              </object>
-            </div>
-          </Container>
           <h4>Relacionados</h4>
-          <Container className="container-relacionados text-center">
-            {productoslista !== undefined
-              ? productoslista
-                  .filter(
-                    (p) =>
-                      p.categoria === producto.categoria &&
-                      p.nombre !== producto.nombre
-                  )
-                  .map(
-                    (p, k) =>
-                      k < 4 && (
-                        <Link
-                          to={`/productos/${p._id}`}
-                          state={{ productoslista: productoslista }}
-                          style={{ textDecoration: "none" }}
-                          key={k}
-                        >
-                          <div className="container-relacionados-card">
-                            <h4>{p.nombre}</h4>
-                            <img src={p.img} alt={p.img} />
-                          </div>
-                        </Link>
-                      )
-                  )
-              : ""}
-          </Container>
+          <Relacionados productoslista={productoslista} producto={producto} />
         </Container>
       )}
     </div>

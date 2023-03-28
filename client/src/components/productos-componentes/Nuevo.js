@@ -146,6 +146,7 @@ const Nuevo = () => {
               id="desc"
               value={desc}
               as="textarea"
+              rows={6}
               onChange={(event) => setDesc(event.target.value)}
             />
           </Form.Group>

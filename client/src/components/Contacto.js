@@ -19,7 +19,7 @@ const Contacto = () => {
     <>
       <div className="container-contacto">
         <Row>
-          <Col className="formulario">
+          <Col className="formulario" style={{ margin: "10% 0" }}>
             <h2>Contacto</h2>
             <Form onSubmit={onSubmit}>
               <Form.Group className="mb-3" controlId="formBasicText">
@@ -28,7 +28,7 @@ const Contacto = () => {
                   onChange={(e) => {
                     setMsg(e.target.value);
                   }}
-                  rows={3}
+                  rows={5}
                   as="textarea"
                   placeholder="Introduzca su mensaje"
                 />
@@ -39,7 +39,7 @@ const Contacto = () => {
             </Form>
           </Col>
 
-          <Col className="container-info">
+          <Col className="container-info" style={{ margin: "10% 0" }}>
             <h4>Corporación MDC Peru S.A.C</h4>
             <ul>
               <li>

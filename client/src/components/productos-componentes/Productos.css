@@ -1,93 +1,40 @@
-.container-productos-main {
-  margin: 0 20ch;
-  display: flex;
+.productos-container {
+  margin: 0 10%;
   background-color: aliceblue;
+  padding: 20px 0;
+}
+.list-group-item .active {
+  background-color: rgb(0, 33, 131);
 }
 
-.container-productos-lateral {
-  background-color: rgb(185, 203, 255);
-  padding: 30px;
-}
-
-.container-productos-lateral dl {
-  list-style: none;
-}
-
-.container-productos-lateral li {
-  padding-top: 20px;
-  text-transform: uppercase;
-}
-
-.container-productos-lateral li:hover {
-  text-decoration-line: underline;
-  cursor: pointer;
-}
-
-.container-productos-lateral li:first-child {
-  border-top: solid 1px gray;
-}
-
-.container-productos-lateral h3:hover {
-  text-decoration-line: underline;
-  cursor: pointer;
-}
-
-.container-productos-productos {
-  width: 100%;
-  padding: 0 0 10ch 0;
-}
-
-.container-productos-productos a {
-  text-decoration: none;
-}
-
-.container-productos-productos h4 {
-  padding: 30px 0 0 50px;
-  font-weight: bold;
-}
-
-.container-cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  margin: 0 50px 0 50px;
-  border-top: solid 1px;
-}
-
-.card-producto {
-  display: grid;
-  text-align: center;
-  margin-top: 50px;
-  border-radius: 10px 10px 0 0;
+.producto-card {
+  height: 100%;
   transition: scale 1s;
+  border-radius: 0 0 10px 10px;
+}
+.card-body {
+  background-color: rgba(0, 33, 131, 0.733);
+  border-radius: 0 0 10px 10px;
 }
 
-.card-producto:hover {
-  scale: 1.1;
+.producto-card .card-title {
+  color: white;
+  font-size: 18px;
+  text-align: center;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+.producto-card:hover {
+  scale: 1.05;
   cursor: pointer;
 }
 
-.card-producto label {
-  color: black;
-  padding: 10px;
-  border-radius: 10px 10px 0 0;
-}
-
-.card-producto img {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-}
-
-@media screen and (max-width: 950px) {
-  .container-productos-main {
+@media (max-width: 768px) {
+  .productos-container {
     margin: 0;
   }
-}
-
-@media screen and (max-width: 600px) {
-  .container-productos-main {
-    margin: 0;
-    flex-direction: column;
+  .categorias-lista li {
+    font-size: 14px;
   }
 }

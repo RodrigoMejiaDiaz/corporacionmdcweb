@@ -13,13 +13,13 @@ export class AcercaDe extends Component {
             <h2>La compañía</h2>
             <div className="container-bloque-empresa">
               <Row>
-                <Col md="7">
+                <Col md="6">
                   <p>
                     Corporación MDC, una empresa dedicada a la importación y
-                    venta al por mayor de equipos y material para laboratorio y
-                    médico. Nuestros productos incluyen pruebas rápidas, equipo
-                    para procesar sangre, lancetas, soluciones de laboratorio y
-                    mucho más. Trabajamos con marcas de renombre como Labcare,
+                    venta de equipos y material para laboratorio y médico.
+                    Nuestros productos incluyen pruebas rápidas, equipo para
+                    procesar sangre, lancetas, soluciones de laboratorio y mucho
+                    más. Trabajamos con marcas de renombre como Labcare,
                     Basecheck, Awareness Technology, AcroBiotech y Wiener lab
                     para asegurarnos de ofrecer la mejor calidad a nuestros
                     clientes.
@@ -33,7 +33,7 @@ export class AcercaDe extends Component {
                     en contacto con nosotros.
                   </p>
                 </Col>
-                <Col md="5">
+                <Col md="6">
                   <img
                     className="img-empresa"
                     src={

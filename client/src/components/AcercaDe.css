@@ -11,7 +11,9 @@
 .container-acerca h2 {
   text-transform: uppercase;
   padding: 2ch 0;
-  color: #000983bb;
+  color: rgb(0, 33, 131);
+  border-bottom: solid;
+  margin: 0 0 2ch 0;
 }
 .container-acerca ul {
   list-style: none;
@@ -24,10 +26,6 @@
   color: rgb(85, 85, 85);
   font-size: larger;
 }
-.container-acerca img {
-  height: 100%;
-  width: 100%;
-}
 .container-acerca b {
   color: rgb(255, 0, 0);
 }
@@ -37,9 +35,9 @@
 }
 
 .img-empresa {
-  margin: 0;
-  padding: 10px;
-  object-fit: cover;
+  height: 500px;
+  width: 100%;
+  object-fit: contain;
 }
 
 .logos {

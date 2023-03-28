@@ -12,11 +12,12 @@ import axios from "axios";
 
 import "./ProductosLista.css";
 import { Link } from "react-router-dom";
+import CategoriasList from "./CategoriasList";
 
 const ProductosLista = () => {
   const [productos, setProductos] = useState([]);
   const [categorias, setCategorias] = useState([]);
-  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(null);
+  const [categoriaActual, setCategoriaActual] = useState(null);
   const [busqueda, setBusqueda] = useState("");
   const [showToast, setShowToast] = useState(false);
 
@@ -40,16 +41,14 @@ const ProductosLista = () => {
   }, []);
 
   const productosFiltrados =
-    categoriaSeleccionada !== null
-      ? productos.filter(
-          (producto) => producto.categoria === categoriaSeleccionada
-        )
+    categoriaActual !== null
+      ? productos.filter((producto) => producto.categoria === categoriaActual)
       : productos.filter((producto) =>
           producto.nombre.toLowerCase().includes(busqueda.toLowerCase())
         );
 
   const handleCategoriaClick = (categoria) => {
-    setCategoriaSeleccionada(categoria);
+    setCategoriaActual(categoria);
   };
 
   const handleEliminarProducto = async (producto) => {
@@ -73,23 +72,11 @@ const ProductosLista = () => {
       <h1>Lista de productos</h1>
       <div className="d-flex">
         <div className="w-25">
-          <ListGroup>
-            <ListGroup.Item
-              active={!categoriaSeleccionada}
-              onClick={() => handleCategoriaClick(null)}
-            >
-              Todos los productos
-            </ListGroup.Item>
-            {categorias.map((categoria) => (
-              <ListGroup.Item
-                key={categoria._id}
-                active={categoriaSeleccionada === categoria.categoria}
-                onClick={() => handleCategoriaClick(categoria.categoria)}
-              >
-                {categoria.categoria}
-              </ListGroup.Item>
-            ))}
-          </ListGroup>
+          <CategoriasList
+            categoriaActual={categoriaActual}
+            categorias={categorias}
+            handleCategoriaClick={handleCategoriaClick}
+          />
           <Link to="/productos/nuevo">
             <Button
               style={{ float: "right", marginTop: "1rem" }}

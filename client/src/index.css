@@ -1,9 +1,10 @@
 body {
   margin: 0;
-  font-family: "Albert Sans", Arial, sans-serif;
+  font-family: Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #f7fdffe5;
+  color: rgb(85, 85, 85);
 }
 
 code {

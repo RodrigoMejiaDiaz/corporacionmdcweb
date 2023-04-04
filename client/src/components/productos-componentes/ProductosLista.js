@@ -109,7 +109,7 @@ const ProductosLista = () => {
               {productosFiltrados.map((producto) => (
                 <tr key={producto._id}>
                   <td>{producto.nombre}</td>
-                  <td>{producto.desc}</td>
+                  <td>{producto.desc.slice(0, 200)}...</td>
                   <td>{producto.marca}</td>
                   <td>{producto.categoria}</td>
                   <td>

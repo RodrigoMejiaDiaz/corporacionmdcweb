@@ -19,20 +19,18 @@ const Producto = () => {
 
   useEffect(() => {
     //Productos
-    if (producto) {
-      axios
-        .get(`/api/productos/${id}`)
-        .then((res) => {
-          setProducto(res.data);
-        })
-        .catch((err) => {
-          console.log("Error from showProductosList" + err);
-          setProducto(undefined);
-        })
-        .then(() => {
-          window.scrollTo(0, 0);
-        });
-    }
+    axios
+      .get(`/api/productos/${id}`)
+      .then((res) => {
+        setProducto(res.data);
+      })
+      .catch((err) => {
+        console.log("Error from showProductosList" + err);
+        setProducto(undefined);
+      })
+      .then(() => {
+        window.scrollTo(0, 0);
+      });
   }, [id]);
 
   //Botón retroceder
@@ -53,7 +51,7 @@ const Producto = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     let msg = `Hola, me gustaría cotizar el producto: ${producto.nombre}, de la marca: ${producto.marca}, que se encuentra en su página web.`;
-    let url = "https://wa.me/51984709174?text=";
+    let url = "https://wa.me/51984341057?text=";
 
     url += `${encodeURI(msg)}&app_absent=0`;
 

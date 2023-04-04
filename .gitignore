@@ -23,7 +23,10 @@ build/
 .env.production.local
 .env
 gToken.json
+.vscode
 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+Pagina web.docx
+.~lock.Pagina web.docx#

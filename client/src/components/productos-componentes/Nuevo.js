@@ -19,6 +19,8 @@ const Nuevo = () => {
   const [desc, setDesc] = useState("");
   const [categoria, setCategoria] = useState("");
   const [img, setImagen] = useState("");
+  const [pdf, setPdf] = useState("");
+  const [previewPdf, setPreviewPdf] = useState("");
   const [previewImagen, setPreviewImagen] = useState("");
   const [categorias, setCategorias] = useState([]);
   const [showToast, setShowToast] = useState(false);
@@ -52,7 +54,7 @@ const Nuevo = () => {
       formData.append("marca", marca);
       formData.append("categoria", categoria);
       formData.append("img", img);
-
+      formData.append("pdf", pdf);
       if (producto) {
         // Petición PUT a la API para editar un producto existente
         const response = await axios.put(
@@ -81,11 +83,19 @@ const Nuevo = () => {
   // Función para manejar el cambio de imagen del formulario
   const handleImagenChange = (event) => {
     const imagen = event.target.files[0];
-    if (imagen) {
-      // Actualiza el estado de imagen
-      setImagen(imagen);
-      setPreviewImagen(URL.createObjectURL(imagen));
-    }
+
+    // Actualiza el estado de imagen
+    setImagen(imagen);
+    setPreviewImagen(URL.createObjectURL(imagen));
+  };
+
+  // Función para manejar el cambio de imagen del formulario
+  const handlePdfChange = (event) => {
+    const pdf = event.target.files[0];
+
+    // Actualiza el estado de imagen
+    setPdf(pdf);
+    setPreviewPdf(pdf.name);
   };
 
   useEffect(() => {
@@ -97,6 +107,8 @@ const Nuevo = () => {
       setMarca(producto.marca);
       setImagen(producto.img);
       setPreviewImagen(producto.img);
+      setPdf(producto.pdf);
+      setPreviewPdf(producto.pdf);
     }
   }, [producto]);
 
@@ -167,6 +179,14 @@ const Nuevo = () => {
               accept="image/*"
             />
           </Form.Group>
+          <Form.Group>
+            <Form.Label>Pdf:</Form.Label>
+            <Form.Control
+              type="file"
+              onChange={handlePdfChange}
+              accept=".pdf"
+            />
+          </Form.Group>
 
           <Button
             variant={!producto ? "success" : "primary"}
@@ -192,6 +212,9 @@ const Nuevo = () => {
           </p>
           <p>
             <b>Marca:</b> {marca}
+          </p>
+          <p>
+            <b>PDF:</b> {previewPdf}
           </p>
           {previewImagen && (
             <Image src={previewImagen} alt="preview imagen" thumbnail />

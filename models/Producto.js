@@ -21,6 +21,10 @@ const ProductoSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  pdf: {
+    type: String,
+    required: false,
+  },
 });
 
 module.exports = Producto = mongoose.model("producto", ProductoSchema);

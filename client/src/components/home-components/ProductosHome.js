@@ -7,7 +7,7 @@ const ProductosHome = () => {
     {
       marca: "Wiener lab",
       categoria: "Bioquimica",
-      img: "https://storage.googleapis.com/corporacionmdc-imgs/bioquimica.png",
+      img: "https://storage.googleapis.com/corporacionmdc-imgs/wienerglucosa.jpg",
     },
     {
       marca: "Diagtest",

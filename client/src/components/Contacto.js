@@ -9,7 +9,7 @@ const Contacto = () => {
   //Enviar mensaje Whatsapp
   const onSubmit = (e) => {
     e.preventDefault();
-    let url = "https://wa.me/51984709174?text=";
+    let url = "https://wa.me/51984341057?text=";
 
     url += `${encodeURI(msg)}&app_absent=0`;
 
@@ -47,23 +47,18 @@ const Contacto = () => {
                 <a
                   target={"_blank"}
                   rel="noreferrer"
-                  href="https://wa.me/51997569511"
+                  href="https://wa.me/51984341057"
                   style={{ color: "white" }}
                 >
-                  997569511
-                </a>{" "}
-                /{" "}
-                <a
-                  target={"_blank"}
-                  rel="noreferrer"
-                  href="https://wa.me/51984709174"
-                  style={{ color: "white" }}
-                >
-                  984709174
+                  984341057
                 </a>
               </li>
-              <li>Teléfono: (01)401174</li>
-              <li>Correo: </li>
+              <li>Celular (Sólo llamadas): +51 984770391</li>
+              <li>Teléfono: (054) 585755</li>
+              <li>
+                Correos: cotizaciones@corporacionmdcperu.com /{" "}
+                corporacion.mdc.peru@outlook.com
+              </li>
             </ul>
           </Col>
         </Row>

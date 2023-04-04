@@ -48,18 +48,13 @@ const DetalleProducto = ({ producto, onSubmit, mostrarPDF, pdf }) => {
 
         <div className={`pdf-viewer ${pdf}`}>
           <object
-            data={
-              "https://storage.googleapis.com/corporacionmdc-imgs/pdfPrueba.pdf"
-            }
+            data={producto.pdf}
             type="application/pdf"
             width="100%"
             height="100%"
           >
             <p>
-              Texto Alternativo -{" "}
-              <a href="https://storage.googleapis.com/corporacionmdc-imgs/pdfPrueba.pdf">
-                Abrir PDF
-              </a>
+              Texto Alternativo - <a href={producto.pdf}>Abrir PDF</a>
             </p>
           </object>
         </div>

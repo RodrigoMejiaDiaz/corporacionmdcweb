@@ -1,68 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const { Storage } = require("@google-cloud/storage");
 const path = require("path");
-const { v4: uuidv4 } = require("uuid");
-const multer = require("multer");
-const os = require("os");
-const fs = require("fs");
-
-const storageM = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, os.tmpdir());
-  },
-  filename: function (req, file, cb) {
-    cb(null, uuidv4() + "-" + Date.now() + path.extname(file.originalname));
-  },
-});
-
-const fileFilter = (req, file, cb) => {
-  const allowedFileTypes = ["image/jpeg", "image/jpg", "image/png"];
-  if (allowedFileTypes.includes(file.mimetype)) {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
-
-let upload = multer({ storage: storageM, fileFilter });
-
-const gTokenPath = path.join(`${__dirname}/gToken.json`);
-fs.writeFileSync(gTokenPath, process.env.GCS_KEYFILE);
-const keyfile = JSON.parse(process.env.GCS_KEYFILE);
-const storage = new Storage({
-  projectId: keyfile.project_id,
-  keyFilename: gTokenPath,
-});
-
-const subirImagen = async (archivo) => {
-  try {
-    const nombreArchivo = uuidv4() + path.extname(archivo.originalname);
-    const archivoStream = archivo.path;
-    const opcionesUpload = {
-      destination: nombreArchivo,
-      resumable: false,
-      metadata: {
-        contentType: archivo.mimetype,
-      },
-    };
-    const bucket = storage.bucket("corporacionmdc-imgs");
-    await bucket.upload(archivoStream, opcionesUpload);
-    const url = `https://storage.googleapis.com/${bucket.name}/${nombreArchivo}`;
-    console.log("Se subió la imagen al url:" + url);
-    return url;
-  } catch (error) {
-    console.log(error);
-    throw new Error("Error al subir la imagen al bucket");
-  }
-};
-
-async function deleteImageFromBucket(filename) {
-  // Elimina la imagen del bucket
-  await bucket.file(filename).delete();
-
-  console.log(`Imagen ${filename} eliminada del bucket`);
-}
+const {
+  upload,
+  subirImagen,
+  deleteImageFromBucket,
+  subirPdf,
+  deletePdfFromBucket,
+} = require("./gcs");
 
 // Load Categoria model
 const Categoria = require("../../models/Categoria");
@@ -119,58 +64,91 @@ router.get("/productos/:id", (req, res) => {
 // @route POST api/productos
 // @description Add a new producto
 // @access Public
-router.post("/productos", upload.single("img"), async (req, res) => {
-  try {
-    const { nombre, desc, marca, categoria } = req.body;
-    const img = await subirImagen(req.file);
-    const nuevoProducto = new Producto({
-      nombre,
-      desc,
-      marca,
-      categoria,
-      img,
-    });
-    const productoGuardado = await nuevoProducto.save();
-    res.json(productoGuardado);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ mensaje: "Error al guardar el producto" });
+router.post(
+  "/productos",
+  upload.fields([{ name: "img" }, { name: "pdf" }]),
+  async (req, res) => {
+    try {
+      const { nombre, desc, marca, categoria } = req.body;
+      let img = req.files["img"] ? req.files["img"][0] : undefined;
+      let pdf = req.files["pdf"] ? req.files["pdf"][0] : undefined;
+
+      if (img) {
+        img = await subirImagen(req.files["img"][0]);
+      } else {
+        //imagen placeholder en caso de no subir imagen
+        img =
+          "https://storage.googleapis.com/corporacionmdc-imgs/soluciones.png";
+      }
+
+      if (pdf) {
+        pdf = await subirPdf(req.files["pdf"][0]);
+      } else {
+        //espacio vacio en caso de no subir pdf
+        pdf = "";
+      }
+      const nuevoProducto = new Producto({
+        nombre,
+        desc,
+        marca,
+        categoria,
+        img,
+        pdf,
+      });
+      const productoGuardado = await nuevoProducto.save();
+      res.json(productoGuardado);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ mensaje: "Error al guardar el producto" });
+    }
   }
-});
+);
 
 // @route PUT api/productos
 // @description Editar un producto
 // @access Public
-router.put("/productos/:id", upload.single("img"), async (req, res) => {
-  try {
-    const { nombre, desc, marca, img, categoria } = req.body;
+router.put(
+  "/productos/:id",
+  upload.fields([{ name: "img" }, { name: "pdf" }]),
+  async (req, res) => {
+    try {
+      const { nombre, desc, marca, img, categoria, pdf } = req.body;
 
-    // Verificar si existe el producto
-    const productoExistente = await Producto.findById(req.params.id);
+      // Verificar si existe el producto
+      const productoExistente = await Producto.findById(req.params.id);
 
-    if (!productoExistente) {
-      return res.status(404).json({ msg: "Producto no encontrado" });
+      if (!productoExistente) {
+        return res.status(404).json({ msg: "Producto no encontrado" });
+      }
+
+      // Actualizar el producto
+      productoExistente.nombre = nombre;
+      productoExistente.desc = desc;
+      productoExistente.marca = marca;
+      productoExistente.categoria = categoria;
+      if (productoExistente.img !== img) {
+        const filename = path.basename(productoExistente.img);
+        await deleteImageFromBucket(filename);
+        const img = await subirImagen(req.files["img"][0]);
+        productoExistente.img = img;
+      }
+      if (productoExistente.pdf !== pdf) {
+        const filename = path.basename(productoExistente.pdf);
+        if (filename !== "") {
+          await deletePdfFromBucket(filename);
+        }
+        const pdf = await subirPdf(req.files["pdf"][0]);
+        productoExistente.pdf = pdf;
+      }
+
+      const productoActualizado = await productoExistente.save();
+      res.json(productoActualizado);
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send("Error en el servidor");
     }
-
-    // Actualizar el producto
-    productoExistente.nombre = nombre;
-    productoExistente.desc = desc;
-    productoExistente.marca = marca;
-    productoExistente.categoria = categoria;
-    if (productoExistente.img !== img) {
-      const filename = path.basename(productoExistente.img);
-      await deleteImageFromBucket(filename);
-      const img = await subirImagen(req.file);
-      productoExistente.img = img;
-    }
-
-    const productoActualizado = await productoExistente.save();
-    res.json(productoActualizado);
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).send("Error en el servidor");
   }
-});
+);
 
 // @route DELETE api/productos/:id
 // @desc Elimina un producto por su ID
@@ -182,8 +160,14 @@ router.delete("/productos/:id", async (req, res) => {
     if (!producto) {
       return res.status(404).json({ msg: "Producto no encontrado" });
     }
-    const filename = path.basename(producto.img);
-    await deleteImageFromBucket(filename);
+    const filenameImg = path.basename(producto.img);
+    const filenamePdf = path.basename(producto.pdf);
+    if (filenameImg !== "wienerglucosa.jpg") {
+      await deleteImageFromBucket(filenameImg);
+    }
+    if (filenamePdf !== "") {
+      await deletePdfFromBucket(filenamePdf);
+    }
 
     await producto.deleteOne();
 

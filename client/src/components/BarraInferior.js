@@ -1,6 +1,7 @@
 import React from "react";
 import "./BarraInferior.css";
 import { NavLink } from "react-router-dom";
+import IgLogo from "../Instagram_Glyph_Gradient.png";
 
 const BarraInferior = ({ token }) => {
   return (
@@ -101,7 +102,11 @@ const BarraInferior = ({ token }) => {
           </ul>
         </div>
         <div className="columna">
-          <a href="https://www.facebook.com" target={"_blank"} rel="noreferrer">
+          <a
+            href="https://www.facebook.com/Corporacionmdcperu"
+            target={"_blank"}
+            rel="noreferrer"
+          >
             <img
               className="logo-socials"
               src={
@@ -110,40 +115,41 @@ const BarraInferior = ({ token }) => {
               alt="facebook logo"
             />
           </a>
+          <a
+            href="https://www.instagram.com/corp.mdcperu/"
+            target={"_blank"}
+            rel="noreferrer"
+            style={{ marginLeft: "1rem" }}
+          >
+            <img className="logo-socials" src={IgLogo} alt="instagram logo" />
+          </a>
           <ul className="columna-lista">
             <li>
               <NavLink to={"/login"}>
                 <label>Corporación MDC Peru S.A.C</label>
               </NavLink>
             </li>
-            <li>
-              <label>
+            <label>
+              <li>
                 Whatsapp: +51{" "}
                 <a
                   target={"_blank"}
                   rel="noreferrer"
-                  href="https://wa.me/51997569511"
+                  href="https://wa.me/51984341057"
                   style={{ color: "white" }}
                 >
-                  997569511
-                </a>{" "}
-                /{" "}
-                <a
-                  target={"_blank"}
-                  rel="noreferrer"
-                  href="https://wa.me/51984709174"
-                  style={{ color: "white" }}
-                >
-                  984709174
+                  984341057
                 </a>
-              </label>
-            </li>
+              </li>
+              <li>Celular (Sólo llamadas): +51 984770391</li>
+            </label>
             <li>
-              <label>Teléfono: (01)401174</label>
+              <label>Teléfono: (054) 585755</label>
             </li>
-            <li>
-              <label>Correo: </label>
-            </li>
+            <label>
+              <li>Correos: cotizaciones@corporacionmdcperu.com</li>
+              <li>corporacion.mdc.peru@outlook.com</li>
+            </label>
           </ul>
         </div>
       </div>

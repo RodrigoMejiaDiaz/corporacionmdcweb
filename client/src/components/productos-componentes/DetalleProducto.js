@@ -9,6 +9,7 @@ const DetalleProducto = ({ producto, onSubmit, mostrarPDF, pdf }) => {
           <Col md={10}>
             <Row className="descripcion-producto">
               <h2
+                className="azul"
                 style={{
                   borderBottom: "solid 2px ",
                   paddingBottom: "1ch",
@@ -17,8 +18,12 @@ const DetalleProducto = ({ producto, onSubmit, mostrarPDF, pdf }) => {
                 {producto.nombre}
               </h2>
               <p>{producto.desc}</p>
-              <p>Marca: {producto.marca}</p>
-              <p>Categoria: {producto.categoria}</p>
+              <p>
+                <b className="azul">Marca:</b> {producto.marca}
+              </p>
+              <p>
+                <b className="azul">Categoria:</b> {producto.categoria}
+              </p>
             </Row>
             <Row
               style={{
@@ -48,6 +53,7 @@ const DetalleProducto = ({ producto, onSubmit, mostrarPDF, pdf }) => {
 
         <div className={`pdf-viewer ${pdf}`}>
           <object
+            id="pdf-object"
             data={producto.pdf}
             type="application/pdf"
             width="100%"

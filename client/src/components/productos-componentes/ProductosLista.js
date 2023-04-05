@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  ListGroup,
   Form,
   FormControl,
   Table,
@@ -20,32 +19,43 @@ const ProductosLista = () => {
   const [categoriaActual, setCategoriaActual] = useState(null);
   const [busqueda, setBusqueda] = useState("");
   const [showToast, setShowToast] = useState(false);
-
+  let [veces, setVeces] = useState(0);
   useEffect(() => {
-    axios
-      .get("/api/categorias")
-      .then((res) => {
-        setCategorias(res.data);
-      })
-      .catch((err) => {
-        console.log("Error from showCategoriaList", err);
-      });
-    axios
-      .get("/api/productos")
-      .then((response) => {
-        setProductos(response.data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+    if (veces <= 0) {
+      axios
+        .get("/api/categorias")
+        .then((res) => {
+          setCategorias(res.data);
+        })
+        .catch((err) => {
+          console.log("Error from showCategoriaList", err);
+        });
+      axios
+        .get("/api/productos")
+        .then((response) => {
+          setProductos(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+      setVeces(veces++);
+    }
+  }, [veces]);
 
   const productosFiltrados =
     categoriaActual !== null
-      ? productos.filter((producto) => producto.categoria === categoriaActual)
-      : productos.filter((producto) =>
-          producto.nombre.toLowerCase().includes(busqueda.toLowerCase())
-        );
+      ? productos
+          .filter(
+            (producto) =>
+              producto.categoria === categoriaActual &&
+              producto.nombre.toLowerCase().includes(busqueda.toLowerCase())
+          )
+          .sort((a, b) => a.nombre.localeCompare(b.nombre))
+      : productos
+          .filter((producto) =>
+            producto.nombre.toLowerCase().includes(busqueda.toLowerCase())
+          )
+          .sort((a, b) => a.nombre.localeCompare(b.nombre));
 
   const handleCategoriaClick = (categoria) => {
     setCategoriaActual(categoria);

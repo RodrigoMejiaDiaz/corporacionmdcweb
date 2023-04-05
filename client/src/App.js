@@ -41,7 +41,7 @@ function App() {
 
   return (
     <div className="App ">
-      <header className="App-header">
+      <header className="App-header azul-borde">
         <ul className="horizontal-menu-1">
           {token && (
             <li>
@@ -59,7 +59,7 @@ function App() {
               style={({ isActive }) => {
                 return isActive
                   ? {
-                      color: "blue",
+                      color: "#000cb1",
                       borderRadius: "10px 10px 10px",
                       textDecoration: "none",
                       fontWeight: "bold",
@@ -79,7 +79,7 @@ function App() {
               style={({ isActive }) => {
                 return isActive
                   ? {
-                      color: "blue",
+                      color: "#000cb1",
                       borderRadius: "10px 10px 10px",
                       textDecoration: "none",
                       fontWeight: "bold",
@@ -99,7 +99,7 @@ function App() {
               style={({ isActive }) => {
                 return isActive
                   ? {
-                      color: "blue",
+                      color: "#000cb1",
                       borderRadius: "10px 10px 10px",
                       textDecoration: "none",
                       fontWeight: "bold",
@@ -119,7 +119,7 @@ function App() {
               style={({ isActive }) => {
                 return isActive
                   ? {
-                      color: "blue",
+                      color: "#000cb1",
                       borderRadius: "10px 10px 10px",
                       textDecoration: "none",
                       fontWeight: "bold",

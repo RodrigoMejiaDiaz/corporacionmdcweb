@@ -10,7 +10,7 @@ export class AcercaDe extends Component {
       <div className="acerca-de">
         <Fade cascade>
           <div className="container-acerca">
-            <h2>La compañía</h2>
+            <h2 className="azul">La compañía</h2>
             <div className="container-bloque-empresa">
               <Row>
                 <Col md="6">
@@ -49,7 +49,7 @@ export class AcercaDe extends Component {
             <Marcas />
           </div>
           <div className="container-acerca">
-            <h2>Certificaciones</h2>
+            <h2 className="azul">Certificaciones</h2>
             <p>
               Contamos con sedes en Arequipa y Cuzco y nos enorgullecemos de
               tener los certificados de{" "}

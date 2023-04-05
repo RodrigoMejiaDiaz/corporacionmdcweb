@@ -35,9 +35,9 @@ const ProductosHome = () => {
           style={{ textDecoration: "none" }}
         >
           <div className="card-item">
-            <h4>{item.marca}</h4>
+            <h4 className="azul">{item.marca}</h4>
             <img src={item.img} alt={item.img} />
-            <div className="card-text">
+            <div className="card-text azul-fondo">
               <p>{item.categoria}</p>
             </div>
           </div>

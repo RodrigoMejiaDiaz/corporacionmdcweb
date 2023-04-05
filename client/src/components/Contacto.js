@@ -20,7 +20,7 @@ const Contacto = () => {
       <div className="container-contacto">
         <Row>
           <Col className="formulario" style={{ margin: "10% 0" }}>
-            <h2>Contacto</h2>
+            <h2 className="azul">Contacto</h2>
             <Form onSubmit={onSubmit}>
               <Form.Group className="mb-3" controlId="formBasicText">
                 <Form.Label>Mensaje</Form.Label>
@@ -39,7 +39,10 @@ const Contacto = () => {
             </Form>
           </Col>
 
-          <Col className="container-info" style={{ margin: "10% 0" }}>
+          <Col
+            className="container-info azul-fondo"
+            style={{ margin: "10% 0" }}
+          >
             <h4>Corporación MDC Peru S.A.C</h4>
             <ul>
               <li>

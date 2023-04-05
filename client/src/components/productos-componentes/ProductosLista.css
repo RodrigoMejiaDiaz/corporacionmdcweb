@@ -1,10 +1,14 @@
 .list-group-item:hover {
   cursor: pointer;
   color: white;
-  border-color: rgb(0, 33, 131);
-  background-color: rgb(0, 33, 131);
+  border-color: #000983c7;
+  background-color: #000983c7;
 }
 .list-group-item.active {
-  border-color: rgb(0, 33, 131) !important;
-  background-color: rgb(0, 33, 131) !important;
+  border-color: #000983c7 !important;
+  background-color: #000983c7 !important;
+}
+.btn-primary {
+  border-color: #000983c7 !important;
+  background-color: #000983c7 !important;
 }

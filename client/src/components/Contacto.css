@@ -12,7 +12,6 @@
 .formulario h2 {
   padding-left: 5px;
   padding-bottom: 15px;
-  color: #0844a4;
   font-weight: bold;
 }
 .formulario label {
@@ -20,7 +19,6 @@
 }
 
 .container-info {
-  background-color: #0844a4;
   opacity: 90%;
   padding-top: 20px;
   color: white;

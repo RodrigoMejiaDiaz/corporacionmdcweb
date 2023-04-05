@@ -50,6 +50,17 @@ router.get("/productos", (req, res) => {
     );
 });
 
+// @route GET api/productos/:categoria
+// @description Get productos by categoria
+// @access Public
+router.get("/productos/categoria/:categoria", (req, res) => {
+  Producto.find({ categoria: req.params.categoria })
+    .then((productos) => res.json(productos))
+    .catch((err) =>
+      res.status(404).json({ nohayproductos: "No Productos encontrados" })
+    );
+});
+
 // @route GET api/productos/:id
 // @description Get single producto by id
 // @access Public

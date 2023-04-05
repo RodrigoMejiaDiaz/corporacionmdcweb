@@ -10,11 +10,10 @@
   height: auto;
   background-color: white;
   border-radius: 5px;
-  box-shadow: 1px 1px 5px;
+  box-shadow: 1px 1px 3px;
 }
 .card-item h4 {
   text-align: center;
-  color: #000983;
   margin: 10px 0;
 }
 .card-item p {
@@ -36,7 +35,6 @@
   background-color: rgb(211, 246, 255);
 }
 .card-text {
-  background-color: rgba(0, 0, 255, 0.397);
   display: flow-root;
 }
 

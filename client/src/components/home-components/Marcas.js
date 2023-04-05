@@ -15,8 +15,8 @@ const Marcas = () => {
     "https://storage.googleapis.com/corporacionmdc-imgs/basechek.jpg",
   ];
   return (
-    <div className="container-marcas">
-      <h3>Marcas importadas</h3>
+    <div className="container-marcas azul-borde">
+      <h3 className="azul-fondo">Marcas importadas</h3>
       <Container>
         <Row>
           {marcas.map((marca, indx) => (

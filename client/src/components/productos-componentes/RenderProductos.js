@@ -17,7 +17,7 @@ const RenderProductos = ({ productosListFiltro, productos }) => {
               src={producto.img}
               style={{ height: "200px", width: "auto", objectFit: "contain" }}
             />
-            <Card.Body>
+            <Card.Body className="azul-fondo">
               <Card.Title>{producto.nombre}</Card.Title>
             </Card.Body>
           </Card>

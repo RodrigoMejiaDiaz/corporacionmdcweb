@@ -3,9 +3,6 @@
   background-color: aliceblue;
   padding: 20px 0;
 }
-.list-group-item .active {
-  background-color: rgb(0, 33, 131);
-}
 
 .producto-card {
   height: 100%;
@@ -13,7 +10,6 @@
   border-radius: 0 0 10px 10px;
 }
 .card-body {
-  background-color: rgba(0, 33, 131, 0.733);
   border-radius: 0 0 10px 10px;
 }
 

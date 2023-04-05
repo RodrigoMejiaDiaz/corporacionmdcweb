@@ -6,7 +6,7 @@ import IgLogo from "../Instagram_Glyph_Gradient.png";
 const BarraInferior = ({ token }) => {
   return (
     <footer>
-      <div className="container-barra">
+      <div className="container-barra azul-fondo">
         <div className="columna">
           <label>Información</label>
           <ul className="columna-lista">
